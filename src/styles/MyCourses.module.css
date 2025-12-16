@@ -1,0 +1,222 @@
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.page {
+    padding: var(--spacing-2xl) 0;
+    min-height: 80vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.filters {
+    display: flex;
+    gap: var(--spacing-xs);
+    background: var(--color-bg-secondary);
+    padding: 4px;
+    border-radius: var(--border-radius-md);
+}
+
+.filters button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.filters button:hover {
+    color: var(--color-text-primary);
+}
+
+.filters button.active {
+    background: var(--color-primary);
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.card:hover {
+    border-color: var(--color-primary);
+}
+
+.thumbnail {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.content {
+    padding: var(--spacing-md);
+}
+
+.content h3 {
+    font-size: 1rem;
+    margin: var(--spacing-sm) 0;
+    color: var(--color-text-primary);
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+}
+
+.progress {
+    margin-bottom: var(--spacing-md);
+}
+
+.progressInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.empty {
+    text-align: center;
+    padding: var(--spacing-3xl);
+}
+
+.empty span {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: var(--spacing-lg);
+}
+
+.empty h2 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.empty p {
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filters {
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Pending Payments Alert */
+.pendingAlert {
+    display: flex;
+    gap: var(--space-lg);
+    background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(243, 156, 18, 0.05));
+    border: 1px solid rgba(241, 196, 15, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.pendingIcon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.pendingContent h3 {
+    color: #f39c12;
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.pendingContent>p {
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-md) 0;
+}
+
+.pendingPaymentsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.pendingPaymentItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+}
+
+.pendingPaymentItem strong {
+    display: block;
+    color: var(--text-primary);
+}
+
+.pendingDate {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.pendingAmount {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.pendingNote {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.2);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .pendingAlert {
+        flex-direction: column;
+        text-align: center;
+    }
+}

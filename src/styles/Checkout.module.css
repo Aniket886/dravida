@@ -1,0 +1,325 @@
+.page {
+    min-height: calc(100vh - 80px);
+    padding: var(--space-xl) 0;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.page h1 {
+    text-align: center;
+    margin-bottom: var(--space-sm);
+}
+
+.loading {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.checkoutGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+}
+
+@media (max-width: 968px) {
+    .checkoutGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* QR Section */
+.qrSection {
+    position: sticky;
+    top: 100px;
+}
+
+.qrCard {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+.qrCard h2 {
+    margin-bottom: var(--space-lg);
+    font-size: 1.5rem;
+}
+
+.amount {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.qrContainer {
+    background: white;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    display: inline-block;
+    margin: var(--space-lg) auto;
+}
+
+.qrImage {
+    width: 280px;
+    height: auto;
+    max-width: 100%;
+    border-radius: var(--radius-sm);
+}
+
+.instructions {
+    text-align: left;
+    background: rgba(var(--primary-rgb), 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.instructions h3 {
+    margin-bottom: var(--space-md);
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.instructions ol {
+    margin: 0;
+    padding-left: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.instructions li {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.instructions strong {
+    color: var(--text-primary);
+}
+
+/* Form Section */
+.formSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.orderSummary {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    padding: var(--space-lg);
+}
+
+.orderSummary h2 {
+    margin-bottom: var(--space-md);
+    font-size: 1.25rem;
+}
+
+.courseList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.courseItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+}
+
+.courseItem span:first-child {
+    color: var(--text-secondary);
+    flex: 1;
+    padding-right: var(--space-md);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-md);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.totalPrice {
+    color: var(--primary);
+    font-size: 1.4rem;
+}
+
+/* Payment Form */
+.paymentForm {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    padding: var(--space-xl);
+}
+
+.paymentForm h2 {
+    margin-bottom: var(--space-xs);
+    font-size: 1.25rem;
+}
+
+.paymentForm p {
+    margin-bottom: var(--space-lg);
+}
+
+.paymentForm .form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.paymentForm label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.paymentForm small {
+    display: block;
+    margin-top: var(--space-xs);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.error {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+    border-left: 3px solid var(--danger);
+}
+
+.note {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(var(--primary-rgb), 0.05);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+}
+
+.backLink {
+    display: inline-block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: var(--primary);
+}
+
+/* Pending Page */
+.pendingCard {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    padding: var(--space-2xl);
+    text-align: center;
+}
+
+.pendingIcon {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.pendingCard h1 {
+    margin-bottom: var(--space-md);
+}
+
+.pendingCard p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.orderId {
+    background: var(--bg-secondary);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    display: inline-block;
+    margin-bottom: var(--space-xl);
+    font-family: monospace;
+}
+
+.orderId strong {
+    color: var(--primary);
+}
+
+.timeline {
+    text-align: left;
+    padding: var(--space-lg);
+    background: rgba(var(--primary-rgb), 0.05);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.timeline h3 {
+    margin-bottom: var(--space-md);
+    font-size: 1rem;
+}
+
+.timeline ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline li {
+    position: relative;
+    padding-left: var(--space-xl);
+    padding-bottom: var(--space-md);
+    color: var(--text-secondary);
+}
+
+.timeline li:last-child {
+    padding-bottom: 0;
+}
+
+.timeline li::before {
+    content: '○';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+}
+
+.timeline li.active::before {
+    content: '●';
+    color: var(--success);
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}

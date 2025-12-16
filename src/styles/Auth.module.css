@@ -1,0 +1,195 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+.container {
+    width: 100%;
+    max-width: 440px;
+}
+
+.formCard {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-2xl);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.logo {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    text-decoration: none;
+    margin-bottom: var(--spacing-lg);
+}
+
+.header h1 {
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.header p {
+    color: var(--color-text-secondary);
+    margin-bottom: 0;
+}
+
+.form {
+    margin-bottom: var(--spacing-lg);
+}
+
+.labelRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgotLink {
+    font-size: 0.85rem;
+    color: var(--color-primary-light);
+}
+
+.submitBtn {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+}
+
+.footerText {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.footerText a {
+    color: var(--color-primary-light);
+    font-weight: 500;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: var(--spacing-lg) 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.divider span {
+    padding: 0 var(--spacing-md);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.demoInfo {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.demoInfo strong {
+    color: var(--color-text-secondary);
+}
+
+.passwordStrength {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
+}
+
+.strengthBar {
+    flex: 1;
+    height: 4px;
+    background: var(--color-bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strengthFill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width var(--transition-base), background var(--transition-base);
+}
+
+.passwordStrength span {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    cursor: pointer;
+}
+
+.checkbox input {
+    margin-top: 3px;
+    accent-color: var(--color-primary);
+}
+
+.checkbox span {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+}
+
+.checkbox a {
+    color: var(--color-primary-light);
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding: var(--spacing-md);
+    }
+
+    .formCard {
+        padding: var(--spacing-lg);
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Google Sign-In Styles */
+.socialLogin {
+    margin-bottom: var(--spacing-md);
+}
+
+.googleBtn {
+    display: flex;
+    justify-content: center;
+    min-height: 44px;
+}
+
+.googleBtn>div {
+    width: 100% !important;
+}
+
+.googleLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}

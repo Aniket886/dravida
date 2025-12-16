@@ -1,0 +1,214 @@
+.videoContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+.videoFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.html5Player {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Custom Controls */
+.controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.html5Player:hover .controls {
+    opacity: 1;
+}
+
+.playBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playBtn:hover {
+    transform: scale(1.1);
+}
+
+.progress {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 3px;
+    transition: width 0.1s linear;
+}
+
+.progress:hover .progressFill {
+    background: var(--color-primary-light);
+}
+
+.time {
+    color: white;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    min-width: 90px;
+    text-align: center;
+}
+
+.volumeControl {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: white;
+}
+
+.volumeSlider {
+    width: 60px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volumeSlider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.fullscreenBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+}
+
+.fullscreenBtn:hover {
+    color: var(--color-primary);
+}
+
+/* Placeholder */
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.placeholderIcon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+.placeholder h3 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-primary);
+}
+
+.placeholder p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+/* Error State */
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.1);
+    color: var(--color-error);
+    font-size: 1rem;
+    text-align: center;
+    padding: var(--spacing-lg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .controls {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        opacity: 1;
+    }
+
+    .time {
+        font-size: 0.75rem;
+        min-width: 70px;
+    }
+
+    .volumeControl {
+        display: none;
+    }
+
+    .playBtn,
+    .fullscreenBtn {
+        font-size: 1.2rem;
+    }
+}
+
+/* Fullscreen Mode */
+.html5Player:fullscreen .controls {
+    opacity: 1;
+}
+
+.html5Player:fullscreen .videoElement {
+    width: 100vw;
+    height: 100vh;
+}

@@ -12,8 +12,10 @@ export default function AdminDashboard() {
     const [pendingCount, setPendingCount] = useState(0);
 
     useEffect(() => {
-        fetchDashboard();
-        fetchPendingPayments();
+        if (token) {
+            fetchDashboard();
+            fetchPendingPayments();
+        }
     }, [token]);
 
     const fetchDashboard = async () => {

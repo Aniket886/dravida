@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const next = require('next');
 require('dotenv').config();
 
 // Import routes
@@ -18,78 +19,79 @@ const { initializeDatabase } = require('./database/init');
 const { seedDatabase } = require('./database/seed');
 const { closeDb } = require('./database/db');
 
-const app = express();
 const PORT = process.env.PORT || 3001;
+const dev = process.env.NODE_ENV !== 'production';
+const nextApp = next({ dev });
+const handle = nextApp.getRequestHandler();
 
-// Middleware
-app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    credentials: true
-}));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
-
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/courses', coursesRoutes);
-app.use('/api/enrollments', enrollmentsRoutes);
-app.use('/api/payments', paymentsRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/wishlist', wishlistRoutes);
-app.use('/api/certificates', certificatesRoutes);
-app.use('/api/admin', adminRoutes);
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-    res.json({
-        status: 'ok',
-        timestamp: new Date().toISOString(),
-        version: '1.0.0'
-    });
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error('Server error:', err);
-    res.status(500).json({
-        error: 'Internal server error',
-        message: process.env.NODE_ENV === 'development' ? err.message : undefined
-    });
-});
-
-// 404 handler
-app.use((req, res) => {
-    res.status(404).json({ error: 'Endpoint not found' });
-});
-
-// Initialize database and start server
 async function startServer() {
     try {
+        // Initialize Next.js first
+        await nextApp.prepare();
+        console.log('\n🌐 Next.js App Prepared');
+
+        const app = express();
+
+        // Middleware
+        app.use(cors({
+            origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+            credentials: true
+        }));
+
+        app.use(express.json());
+        app.use(express.urlencoded({ extended: true }));
+
+        // Serve uploaded files
+        app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+        // API Routes
+        app.use('/api/auth', authRoutes);
+        app.use('/api/courses', coursesRoutes);
+        app.use('/api/enrollments', enrollmentsRoutes);
+        app.use('/api/payments', paymentsRoutes);
+        app.use('/api/cart', cartRoutes);
+        app.use('/api/wishlist', wishlistRoutes);
+        app.use('/api/certificates', certificatesRoutes);
+        app.use('/api/admin', adminRoutes);
+
+        // Health check endpoint
+        app.get('/api/health', (req, res) => {
+            res.json({
+                status: 'ok',
+                timestamp: new Date().toISOString(),
+                version: '1.0.0'
+            });
+        });
+
+        // Next.js Request Handler (User Interface)
+        // This handles all non-API routes by passing them to Next.js
+        app.all('*', (req, res) => {
+            return handle(req, res);
+        });
+
+        // Error handling middleware
+        app.use((err, req, res, next) => {
+            console.error('Server error:', err);
+            res.status(500).json({
+                error: 'Internal server error',
+                message: process.env.NODE_ENV === 'development' ? err.message : undefined
+            });
+        });
+
         console.log('\n🌐 Starting Cyber Dravida LMS Server...\n');
 
         // Initialize database
         await initializeDatabase();
 
-        // Seed with sample data
-        await seedDatabase();
+        // Seed with sample data (optional, maybe check if needed in prod)
+        // await seedDatabase();
 
         // Start server
-        app.listen(PORT, () => {
+        app.listen(PORT, (err) => {
+            if (err) throw err;
             console.log(`\n✅ Server running on http://localhost:${PORT}`);
             console.log(`📚 API available at http://localhost:${PORT}/api`);
-            console.log('\n📋 Available Endpoints:');
-            console.log('   POST /api/auth/signup - Register new user');
-            console.log('   POST /api/auth/login - User login');
-            console.log('   GET  /api/courses - List all courses');
-            console.log('   GET  /api/courses/:id - Course details');
-            console.log('   GET  /api/enrollments - User enrolled courses');
-            console.log('   POST /api/cart - Add to cart');
-            console.log('   GET  /api/admin/dashboard - Admin stats');
-            console.log('\n🔐 Admin Login: admin@cyberdravida.com / Admin@123\n');
+            console.log(`💻 Website available at http://localhost:${PORT}`);
         });
 
     } catch (error) {

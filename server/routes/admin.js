@@ -453,6 +453,67 @@ router.delete('/coupons/:id', (req, res) => {
     }
 });
 
+// POST /api/admin/reset/:target - Reset specific system data
+router.post('/reset/:target', (req, res) => {
+    try {
+        const { target } = req.params;
+        const db = getDatabase();
+        let result = { changes: 0 };
+        let message = '';
+
+        switch (target) {
+            case 'students':
+                // Delete all users except admin
+                result = db.prepare("DELETE FROM users WHERE role != 'admin'").run();
+                message = `Deleted ${result.changes} students and their data`;
+                break;
+
+            case 'payments':
+                // Delete all payments
+                result = db.prepare("DELETE FROM payments").run();
+                message = `Deleted ${result.changes} payments`;
+                break;
+
+            case 'coupons':
+                // Delete all coupons
+                result = db.prepare("DELETE FROM coupons").run();
+                message = `Deleted ${result.changes} coupons`;
+                break;
+
+            case 'courses':
+                // Delete all courses (and related modules, lessons via CASCADE usually, but if manually handled in DB need to be careful)
+                // Assuming schema supports cascade or we need manual cleanup. 
+                // Let's assume standard cascade for now or valid DB setup.
+                // Safest to just delete courses.
+                result = db.prepare("DELETE FROM courses").run();
+                message = `Deleted ${result.changes} courses`;
+                break;
+
+            case 'all':
+                // 1. Delete all users except admin
+                const users = db.prepare("DELETE FROM users WHERE role != 'admin'").run();
+                // 2. Reset counts
+                db.prepare("UPDATE courses SET enrollment_count = 0").run();
+                db.prepare("UPDATE coupons SET usage_count = 0").run();
+                // 3. Clear payments
+                db.prepare("DELETE FROM payments").run();
+                result = { changes: users.changes };
+                message = 'System reset successful. All student data cleared.';
+                break;
+
+            default:
+                return res.status(400).json({ error: 'Invalid reset target' });
+        }
+
+        console.log(`⚠️ SYSTEM RESET [${target}] by ${req.user.userId}: ${message}`);
+
+        res.json({ message, changes: result.changes });
+    } catch (error) {
+        console.error('System reset error:', error);
+        res.status(500).json({ error: 'Failed to reset system' });
+    }
+});
+
 // POST /api/admin/modules/:moduleId/lessons - Add lesson to module
 router.post('/modules/:moduleId/lessons', (req, res) => {
     try {

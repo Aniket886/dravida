@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import AdminLayout from '../../components/AdminLayout';
 import { useAuth } from '../../contexts/AuthContext';
 import styles from '../../styles/Admin.module.css';
+import ResetModal from '../../components/ResetModal';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
@@ -14,9 +15,35 @@ export default function AdminPayments() {
     const [searchEmail, setSearchEmail] = useState('');
     const [processing, setProcessing] = useState(null);
 
+    const [showReset, setShowReset] = useState(false);
+    const [resetLoading, setResetLoading] = useState(false);
+
     useEffect(() => {
         fetchPayments();
     }, [token, filter]);
+
+    const handleReset = async () => {
+        setResetLoading(true);
+        try {
+            const res = await fetch(`${API_URL}/admin/reset/payments`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                alert(data.message);
+                setShowReset(false);
+                fetchPayments(); // Refresh list
+            } else {
+                throw new Error('Reset failed');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Failed to reset payments');
+        } finally {
+            setResetLoading(false);
+        }
+    };
 
     const fetchPayments = async () => {
         if (!token) return;
@@ -161,6 +188,17 @@ export default function AdminPayments() {
 
     return (
         <AdminLayout title="Payment Verification">
+            {/* Reset Button */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+                <button
+                    onClick={() => setShowReset(true)}
+                    className="btn"
+                    style={{ background: '#e74c3c', color: 'white' }}
+                >
+                    ⚠️ Reset All Payments
+                </button>
+            </div>
+
             {/* Filters */}
             <div className={styles.tableContainer} style={{ marginBottom: 'var(--space-lg)' }}>
                 <div className={styles.tableHeader}>
@@ -331,6 +369,15 @@ export default function AdminPayments() {
                     </table>
                 )}
             </div>
+            <ResetModal
+                isOpen={showReset}
+                onClose={() => setShowReset(false)}
+                onConfirm={handleReset}
+                title="Reset Payments"
+                message="Are you sure you want to DELETE ALL PAYMENTS? This clears all transaction history. Course enrollments will remain."
+                confirmText="DELETE"
+                loading={resetLoading}
+            />
         </AdminLayout>
     );
 }

@@ -85,7 +85,7 @@ export const courses = [
         instructor_name: 'Security Expert',
         modules: [],
         reviews: []
-    }
+    },
     {
         id: 4,
         slug: 'osint-mastery',

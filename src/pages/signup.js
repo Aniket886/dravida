@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import styles from '../styles/Auth.module.css';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export default function SignupPage() {
     const router = useRouter();

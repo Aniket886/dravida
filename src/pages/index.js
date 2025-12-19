@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import CourseCard from '../components/CourseCard';
 import styles from '../styles/Home.module.css';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export default function Home() {
     const [featuredCourses, setFeaturedCourses] = useState([]);

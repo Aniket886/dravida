@@ -45,6 +45,7 @@ export function AuthProvider({ children }) {
 
     const login = async (email, password) => {
         try {
+            console.log('Login Attempt:', { email, API_URL });
             const response = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
                 headers: {
@@ -53,10 +54,24 @@ export function AuthProvider({ children }) {
                 body: JSON.stringify({ email, password })
             });
 
-            const data = await response.json();
+            console.log('Login Response Status:', response.status);
 
-            if (!response.ok) {
-                throw new Error(data.error || 'Login failed');
+            // Clone response to read text if JSON fails
+            const resClone = response.clone();
+            try {
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Login failed');
+                }
+                localStorage.setItem('token', data.token);
+                setToken(data.token);
+                setUser(data.user);
+                return { success: true };
+            } catch (err) {
+                const text = await resClone.text();
+                console.error('Login Parse Error:', err);
+                console.error('Response Text:', text);
+                return { success: false, error: `Server Error (${response.status}): ${text.slice(0, 100)}...` };
             }
 
             localStorage.setItem('token', data.token);

@@ -6,7 +6,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import VideoPlayer, { detectVideoType } from '../../../components/VideoPlayer';
 import styles from '../../../styles/Learn.module.css';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export default function LearnPage() {
     const router = useRouter();

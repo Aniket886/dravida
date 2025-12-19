@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import styles from '../../styles/Admin.module.css';
 import ResetModal from '../../components/ResetModal';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export default function AdminStudents() {
     const { token } = useAuth();

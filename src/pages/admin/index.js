@@ -3,7 +3,7 @@ import AdminLayout from '../../components/AdminLayout';
 import { useAuth } from '../../contexts/AuthContext';
 import styles from '../../styles/Admin.module.css';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export default function AdminDashboard() {
     const { token } = useAuth();

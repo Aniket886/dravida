@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import styles from '../styles/Auth.module.css';
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '420316358222-dl8kui8snt01i1qqn33jql4fs1m4a0vn.apps.googleusercontent.com';
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export default function LoginPage() {
     const router = useRouter();

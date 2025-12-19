@@ -73,11 +73,6 @@ export function AuthProvider({ children }) {
                 console.error('Response Text:', text);
                 return { success: false, error: `Server Error (${response.status}): ${text.slice(0, 100)}...` };
             }
-
-            localStorage.setItem('token', data.token);
-            setToken(data.token);
-            setUser(data.user);
-            return { success: true };
         } catch (error) {
             return { success: false, error: error.message };
         }

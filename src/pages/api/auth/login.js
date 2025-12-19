@@ -14,9 +14,9 @@ export default function handler(req, res) {
     const token = 'mock-jwt-token-123456789';
     const user = {
         id: 1,
-        name: 'Demo User',
+        name: email.includes('admin') ? 'Admin User' : 'Demo User',
         email: email,
-        role: 'student',
+        role: email === 'admin@cyberdravida.com' ? 'admin' : 'student',
         phone: '1234567890'
     };
 

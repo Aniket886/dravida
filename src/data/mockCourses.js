@@ -86,11 +86,69 @@ export const courses = [
         modules: [],
         reviews: []
     }
+    {
+        id: 4,
+        slug: 'osint-mastery',
+        title: 'OSINT Mastery: Open Source Intelligence',
+        short_description: 'Master the art of gathering information from public sources. Essential for investigators and ethical hackers.',
+        description: 'Open Source Intelligence (OSINT) is a critical skill for any cybersecurity professional. In this course, you will learn how to find hidden information about targets using search engines, social media, and specialized tools.\n\nKey topics:\n- Google Dorking\n- Social Media Intelligence (SOCMINT)\n- Geolocation Analysis\n- People Searching\n- Investigating Corporate Infrastructure',
+        price: 3999,
+        original_price: 7999,
+        thumbnail: 'https://images.unsplash.com/photo-1549605655-3162772584f6?w=800&q=80',
+        rating_avg: 4.8,
+        rating_count: 75,
+        enrollment_count: 670,
+        level: 'intermediate',
+        category: 'OSINT',
+        duration: 320,
+        instructor_name: 'Aniket Tegginamath',
+        modules: [
+            {
+                id: 401,
+                title: 'OSINT Basics',
+                lessons: [
+                    { id: 4001, title: 'Introduction to OSINT Framework', duration: 25, is_preview: true },
+                    { id: 4002, title: 'Advanced Google Search Operators', duration: 35, is_preview: false }
+                ]
+            }
+        ],
+        reviews: []
+    },
+    {
+        id: 5,
+        slug: 'bug-bounty-hunting',
+        title: 'Bug Bounty Hunting: Zero to Hero',
+        short_description: 'Learn how to find bugs in real-world applications and get paid for it. Covers XSS, SQLi, IDOR, and more.',
+        description: 'Start your career as a Bug Bounty Hunter. This course takes you from the basics of web vulnerabilities to advanced exploitation techniques. You will learn how to write professional reports and earn bounties from platforms like HackerOne and Bugcrowd.\n\nWhat you will learn:\n- Reconnaissance for Bug Bounty\n- Finding XSS (Cross-Site Scripting)\n- Exploiting IDOR vulnerabilities\n- Automating your workflow\n- Report writing best practices',
+        price: 5999,
+        original_price: 11999,
+        thumbnail: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80',
+        rating_avg: 4.9,
+        rating_count: 210,
+        enrollment_count: 1890,
+        level: 'advanced',
+        category: 'Bug Bounty',
+        duration: 600,
+        instructor_name: 'Cyber Dravida Team',
+        modules: [
+            {
+                id: 501,
+                title: 'Getting Started',
+                lessons: [
+                    { id: 5001, title: 'Choosing a Program', duration: 20, is_preview: true },
+                    { id: 5002, title: 'Scope and Rules of Engagement', duration: 25, is_preview: true }
+                ]
+            }
+        ],
+        reviews: []
+    }
 ];
 
 export const categories = [
     { category: 'Network Security', count: 12 },
     { category: 'Ethical Hacking', count: 8 },
     { category: 'Web Security', count: 5 },
-    { category: 'Cloud Security', count: 4 }
+    { category: 'Cloud Security', count: 4 },
+    { category: 'OSINT', count: 6 },
+    { category: 'Bug Bounty', count: 9 }
 ];

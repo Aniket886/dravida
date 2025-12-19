@@ -4,11 +4,12 @@
   "description": "Cyber Dravida Learning Management System",
   "private": true,
   "scripts": {
-    "dev": "node server/index.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node server/index.js",
+    "start": "next start",
     "server": "node server/index.js",
-    "dev:legacy": "next dev",
+    "dev:custom": "node server/index.js",
+    "start:custom": "NODE_ENV=production node server/index.js",
     "db:init": "node server/database/init.js",
     "db:seed": "node server/database/seed.js"
   },

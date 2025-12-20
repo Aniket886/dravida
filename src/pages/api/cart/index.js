@@ -1,4 +1,4 @@
-import { getCollection } from '../../lib/mongodb';
+import { getCollection } from '../../../lib/mongodb';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-in-production';
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
 
         try {
             // Get course details from mock data
-            const { courses } = await import('../../data/mockCourses');
+            const { courses } = await import('../../../data/mockCourses');
             const course = courses.find(c => c.id === parseInt(courseId) || c.id === courseId || c.slug === courseId);
 
             if (!course) {

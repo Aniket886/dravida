@@ -1,4 +1,4 @@
-import { courses } from '../../../data/mockCourses';
+import { courses } from '../../../../data/mockCourses';
 
 export default function handler(req, res) {
     const authHeader = req.headers.authorization;

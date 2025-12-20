@@ -1,4 +1,4 @@
-import { getCollection } from '../../../lib/mongodb';
+import { getCollection } from '../../../../lib/mongodb';
 
 export default async function handler(req, res) {
     const authHeader = req.headers.authorization;

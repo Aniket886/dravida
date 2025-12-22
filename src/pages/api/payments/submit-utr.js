@@ -66,6 +66,16 @@ export default async function handler(req, res) {
             updatedAt: new Date()
         };
 
+        // Generate readable order ID: YYYYMM + count
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const count = await paymentsCollection.countDocuments() + 1;
+        const orderId = `${year}${month}${String(count).padStart(2, '0')}`;
+
+        // Update payment with orderId
+        payment.orderId = orderId;
+
         const result = await paymentsCollection.insertOne(payment);
 
         // Increment coupon usage if used
@@ -80,6 +90,7 @@ export default async function handler(req, res) {
         return res.status(200).json({
             success: true,
             paymentId: result.insertedId.toString(),
+            orderId: orderId,
             message: 'Payment submitted for verification'
         });
     } catch (error) {

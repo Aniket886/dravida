@@ -16,7 +16,15 @@ export default async function handler(req, res) {
     try {
         const paymentsCollection = await getCollection('payments');
 
-        const result = await paymentsCollection.updateOne(
+        // Get payment details first
+        const payment = await paymentsCollection.findOne({ _id: new ObjectId(id) });
+
+        if (!payment) {
+            return res.status(404).json({ error: 'Payment not found' });
+        }
+
+        // Update payment status
+        await paymentsCollection.updateOne(
             { _id: new ObjectId(id) },
             {
                 $set: {
@@ -27,13 +35,36 @@ export default async function handler(req, res) {
             }
         );
 
-        if (result.matchedCount === 0) {
-            return res.status(404).json({ error: 'Payment not found' });
+        // Create enrollment records for each course in the payment
+        const enrollmentsCollection = await getCollection('enrollments');
+        const courseIds = payment.courseIds || [];
+
+        for (const courseId of courseIds) {
+            // Check if already enrolled
+            const existing = await enrollmentsCollection.findOne({
+                userId: payment.userId,
+                courseId: parseInt(courseId) || courseId
+            });
+
+            if (!existing) {
+                await enrollmentsCollection.insertOne({
+                    userId: payment.userId,
+                    userEmail: payment.userEmail,
+                    courseId: parseInt(courseId) || courseId,
+                    paymentId: payment._id.toString(),
+                    status: 'active',
+                    progress: 0,
+                    completedLessons: 0,
+                    enrolledAt: new Date(),
+                    updatedAt: new Date()
+                });
+            }
         }
 
-        // TODO: Create enrollment records for the user's purchased courses
-
-        res.status(200).json({ success: true, message: 'Payment verified successfully' });
+        res.status(200).json({
+            success: true,
+            message: 'Payment verified and courses unlocked!'
+        });
     } catch (error) {
         console.error('Verify payment error:', error);
         res.status(500).json({ error: 'Failed to verify payment' });

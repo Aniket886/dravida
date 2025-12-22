@@ -23,18 +23,36 @@
     grid-template-columns: 1fr 1fr;
     gap: var(--space-xl);
     margin-top: var(--space-xl);
+    align-items: start;
 }
 
 @media (max-width: 968px) {
     .checkoutGrid {
         grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .qrSection {
+        order: 1;
+    }
+    
+    .formSection {
+        order: 2;
     }
 }
 
-/* QR Section */
+/* QR Section - No sticky on mobile */
 .qrSection {
-    position: sticky;
-    top: 100px;
+    position: relative;
+}
+
+@media (min-width: 969px) {
+    .qrSection {
+        position: sticky;
+        top: 100px;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
 }
 
 .qrCard {
@@ -66,19 +84,36 @@
     background-clip: text;
 }
 
+@media (max-width: 480px) {
+    .price {
+        font-size: 2rem;
+    }
+}
+
 .qrContainer {
     background: white;
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     display: inline-block;
     margin: var(--space-lg) auto;
+    max-width: 100%;
 }
 
 .qrImage {
-    width: 280px;
+    width: 250px;
     height: auto;
     max-width: 100%;
     border-radius: var(--radius-sm);
+}
+
+@media (max-width: 480px) {
+    .qrImage {
+        width: 200px;
+    }
+    
+    .qrContainer {
+        padding: var(--space-md);
+    }
 }
 
 .instructions {
@@ -106,6 +141,17 @@
 .instructions li {
     color: var(--text-secondary);
     line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+    .instructions {
+        padding: var(--space-md);
+    }
+    
+    .instructions li {
+        font-size: 0.9rem;
+    }
 }
 
 .instructions strong {

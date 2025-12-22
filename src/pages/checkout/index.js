@@ -11,7 +11,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 export default function CheckoutPage() {
     const router = useRouter();
     const { coupon, discount } = router.query;
-    const { isAuthenticated, token, user } = useAuth();
+    const { isAuthenticated, loading: authLoading, token, user } = useAuth();
     const { items, total, clearCart } = useCart();
     const [utrNumber, setUtrNumber] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -26,6 +26,9 @@ export default function CheckoutPage() {
     const finalTotal = total - discountAmount;
 
     useEffect(() => {
+        // Wait for auth to finish loading before checking
+        if (authLoading) return;
+
         if (!isAuthenticated) {
             router.push('/login?redirect=/checkout');
             return;
@@ -33,7 +36,7 @@ export default function CheckoutPage() {
         if (items.length === 0 && !paymentCreated) {
             router.push('/cart');
         }
-    }, [isAuthenticated, items, paymentCreated]);
+    }, [authLoading, isAuthenticated, items, paymentCreated]);
 
     const formatPrice = (amount) => {
         return new Intl.NumberFormat('en-IN', {
@@ -96,7 +99,7 @@ export default function CheckoutPage() {
         }
     };
 
-    if (!isAuthenticated || (items.length === 0 && !paymentCreated)) {
+    if (authLoading || !isAuthenticated || (items.length === 0 && !paymentCreated)) {
         return (
             <div className={styles.loading}>
                 <div className="spinner"></div>
